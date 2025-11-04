@@ -76,6 +76,10 @@ def main():
         rgbd2, o3d.camera.PinholeCameraIntrinsic(
             o3d.camera.PinholeCameraIntrinsicParameters.PrimeSenseDefault))
 
+    # Gravação das nuvens de pontos
+    o3d.io.write_point_cloud("1.ply", pcd1)
+    o3d.io.write_point_cloud("2.ply", pcd2)
+
     # Flip it, otherwise the pointcloud will be upside down
     # pcd.transform([[1, 0, 0, 0], [0, -1, 0, 0], [0, 0, -1, 0], [0, 0, 0, 1]])
     # o3d.visualization.draw_geometries([pcd], zoom=0.35)
@@ -94,6 +98,22 @@ def main():
     pcd1.paint_uniform_color([1, 0, 0])  # reg, green, blue
     pcd2.paint_uniform_color([0, 0, 1])
     entities = [pcd1, pcd2, axes_mesh]
+
+    #Input
+    source = o3d.io.read_point_cloud(pcd1)
+    target = o3d.io.read_point_cloud(pcd2)
+    threshold = 0.02
+    trans_init = np.asarray([[0.996857583523, -0.047511439770, -0.063385106623, 0.120132803917],
+                            [0.047460384667, 0.998870432377, -0.002311720978, 0.130328208208],
+                            [0.063423343003 -0.000703825208 0.997986435890 0.168358176947], [0.0, 0.0, 0.0, 1.0]])
+    draw_registration_result(source, target, trans_init)
+    # 0.996857583523, -0.047511439770, -0.063385106623, 0.120132803917
+    # 0.047460384667, 0.998870432377, -0.002311720978, 0.130328208208
+    # 0.063423343003 -0.000703825208 0.997986435890 0.168358176947
+    # 0.000000000000, 0.000000000000, 0.000000000000, 1.000000000000
+
+    
+
 
     # # Draw the geometries
     o3d.visualization.draw_geometries(entities,
