@@ -175,7 +175,7 @@ def transformation_to_translation_rotation(trans):
     rotvec = rot.as_rotvec()
     return np.concatenate([rotvec, t])
 
-def error_target_source(pcd_source, pcd_target, keep_ratio=0.8):
+def error_target_source(pcd_source, pcd_target, keep_ratio=0.90): #ratio para tirar outliners
     kdtree = o3d.geometry.KDTreeFlann(pcd_target)
 
     src_pts = np.asarray(pcd_source.points)
@@ -270,86 +270,14 @@ result = least_squares(partial(objectiveFunction, shared_mem=shared_mem),
 #0.005
 print('Optimization finished. Result=\n' + str(result))
 
+#falta limitar o numero de iteracoes
+
+params_opti = result.x.tolist()
+trans_opti = translation_rotation_to_transformation(params_opti)
+pcd_source_opti = apply_transformation(pcd2,trans_opti)
+draw_geometries(pcd1,pcd_source_opti, view, False, "Final optimization")
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# max_correspondence_distance = 0.1
-
-# print("Apply point-to-point ICP")
-# reg_p2p = o3d.pipelines.registration.registration_icp(
-#     dpcd2,
-#     dpcd1,
-#     max_correspondence_distance,
-#     init=trans_init,
-#     estimation_method=o3d.pipelines.registration.TransformationEstimationPointToPoint(),
-#     criteria=o3d.pipelines.registration.ICPConvergenceCriteria(max_iteration=2000)
-# )
-# print(reg_p2p)
-# print("Transformation is:")
-# print(reg_p2p.transformation)
-# draw_registration_result(dpcd2, dpcd1, reg_p2p.transformation, view, False, 'ICP downsampling point to point')
-# # show with all the points
-
-# def estimate_normals(pcd):
-#     pcd_normal = deepcopy(pcd)
-#     pcd_normal.estimate_normals(
-#         search_param=o3d.geometry.KDTreeSearchParamHybrid(
-#             radius=0.01,   # raio de procura dos vizinhos (em metros)
-#             max_nn=5     # máximo de vizinhos a considerar
-#         )
-#     )
-#     pcd_normal.orient_normals_consistent_tangent_plane(5)
-#     return pcd_normal
-
-# dpcd2_normal = estimate_normals(dpcd2)
-# dpcd1_normal = estimate_normals(dpcd1)
-
-# #draw_registration_result(dpcd2_normal, dpcd1_normal, reg_p2p.transformation, view, False, 'ICP downsampling with normals')
-
-# draw_registration_result(pcd2, pcd1, reg_p2p.transformation, view, False, 'ICP point to point')
-
-# # pcd2_normal = estimate_normals(pcd2)
-# # pcd1_normal = estimate_normals(pcd1)
-# #draw_registration_result(pcd2_normal, pcd1_normal, reg_p2p.transformation, view, False, 'ICP with normals')
-
-# # Default: fitness = 0,912 inlier = 0,0736
-# # 100 iter: fitness = 0,936 inlier = 0,0490
-
-# print("Apply point-to-plane ICP")
-# reg_p2plane = o3d.pipelines.registration.registration_icp(
-#     dpcd2_normal, 
-#     dpcd1_normal, 
-#     max_correspondence_distance, 
-#     init=trans_init,
-#     estimation_method=o3d.pipelines.registration.TransformationEstimationPointToPlane(),
-#     criteria=o3d.pipelines.registration.ICPConvergenceCriteria(max_iteration=2000),
-# )
-# print(reg_p2plane)
-# print("Transformation is:")
-# print(reg_p2plane.transformation)
-# draw_registration_result(dpcd2_normal, dpcd1_normal, reg_p2plane.transformation, view, False, 'ICP downsampling point to plane')
-# # show with all the points
-
-# draw_registration_result(pcd2, pcd1, reg_p2plane.transformation, view, False, 'ICP point to plane')
 
