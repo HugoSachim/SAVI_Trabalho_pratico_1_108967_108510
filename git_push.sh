@@ -9,6 +9,10 @@ git add .
 # Commit (auto message, or blank)
 git commit -am "Auto commit"
 
+
+# Safely pull remote changes before pushing
+git pull --rebase origin main
+
 # Push to origin
 git push
 
