@@ -1,2 +1,9 @@
-# SAVI_Trabalho_pr-tico_1
+# SAVI_Trabalho_prático_1
 Trabalho prático 1 
+
+O objetivo do trabalho prático 1 foi a familiarização dos estudantes com objetos do tipo point cloud, desde a sua "construção", tratamento com algoritmo ICP (iterative closest point) e desenvolviemnto do prórpio algoritmo costumizado. 
+
+Tarefa 1:
+
+A tarefa 1 consiste na criação de 2 point clouds através de imagens rgbd (rgb + depth) e posterior alinhamento através do algoritmo ICP. Para isso usaram-se as funções da livraria open3d. Primeiramente leram-se 2 pares de imagens constituídos por 1 imagem rgb e outra imagem de profundidade (depth). Através da função "o3d.geometry.RGBDImage.create_from_tum_format" foi possível criar as imagens rgbd e de seguida utilizando "o3d.geometry.PointCloud.create_from_rgbd_image", as imagens anteriores e parâmetros de câmara default criaram-se as point clouds. Também se gravaram estas point clouds como ficheiros .ply para um posterior pré alinhamento no software CloudCompare. Para diminuir o esforço computacional assim como o tempo de execução do algoritmo foi realizado uma diminuição da densidade dos pontos com um parâmetro de 0,015. Foi criada uma função para fazer o display das 2 nuvens de pontos assim como outra função para fazer o display das 2 nuvens de pontos transformadas por uma matriz de transformação. Estas funções foram usadas ao longo do código para visualizar o processo de alinhamento.
+Em seguida aplicou-se a função icp point to point. Esta função toma como argumentos 2 point clouds, a fonte, que vai ser alterada, e a alvo, que serve como referência. Recebe também uma distância máxima a que os pontos devem estar para ser aplicado o método, uma matriz de transformação inicial e o número máximo de iterações caso não se atinja convergência.
