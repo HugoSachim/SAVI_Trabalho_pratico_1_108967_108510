@@ -295,8 +295,12 @@ params_opti = result.x.tolist()
 trans_opti = translation_rotation_to_transformation(params_opti)
 pcd_source_opti = apply_transformation(pcd2,trans_opti)
 draw_geometries(pcd1,pcd_source_opti, view, False, "Final optimization")
+text = str(params_opti)
 
+print('Best parameters (Rx, Ry, Rz, Tx, Ty, Tz) = ' + text )
 
+with open("output_opti.txt", "w") as file:
+    file.write(text)
 
 
 
