@@ -11,5 +11,5 @@ Antes do alinhamento, foi feita uma fase de pré-processamento das nuvens de pon
 Para execução é necessário as seguintes bibliotecas:
 open3d matplotlib numpy pyvista pyvistaqt PyQt5
 
-![Menu](Trabalho_pratico_1/images/Screenshot from 2025-11-13 20-24-22.png)
-![Nuvens iniciais](Trabalho_pratico_1/images/Screenshot from 2025-11-13 20-24-40.png)
+![Menu](/images/Screenshot from 2025-11-13 20-24-22.png)
+![Nuvens iniciais](/images/Screenshot from 2025-11-13 20-24-40.png)
