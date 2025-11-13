@@ -113,9 +113,9 @@ draw_geometries(dpcd1,dpcd2, view, False, "Downsampling")
 
 # Inicial transformation matrix obtained externally
 trans_init = np.asarray([[0.983646262139, -0.081055920198, 0.160841439876, -0.901536037487],
-                         [0.079983057301, 0.996709553274, 0.013144464908, -0.001155507942],
-                         [-0.161377636385, -0.000064913673, 0.986892726825, 0.136104476608], 
-                         [0.0, 0.0, 0.0, 1.0]])
+                        [0.079983057301, 0.996709553274, 0.013144464908, -0.001155507942],
+                        [-0.161377636385, -0.000064913673, 0.986892726825, 0.136104476608], 
+                        [0.0, 0.0, 0.0, 1.0]])
 
 # Function to draw both point clouds 
 
@@ -129,11 +129,11 @@ def draw_registration_result(source, target, transformation, view, paint, name):
         source_temp.paint_uniform_color([1, 0.706, 0])
     entities = [source_temp, target_temp, axes_mesh]
     o3d.visualization.draw_geometries([source_temp, target_temp],
-                                      zoom=view['trajectory'][0]['zoom'],
-                                      front=view['trajectory'][0]['front'],
-                                      lookat=view['trajectory'][0]['lookat'],
-                                      up=view['trajectory'][0]['up'],
-                                      window_name=name)
+                                    zoom=view['trajectory'][0]['zoom'],
+                                    front=view['trajectory'][0]['front'],
+                                    lookat=view['trajectory'][0]['lookat'],
+                                    up=view['trajectory'][0]['up'],
+                                    window_name=name)
 
 # Show the 2 Point Clouds with the inicial external transformation   
 # Apply transformation to point clound
@@ -148,6 +148,7 @@ draw_geometries(pcd1,pcd2_trans, view, False, "Inicial transformation")
 # ---------- Point to Point ICP -----------------------
 # The point cloud source is the one transformed by the calculated trasform matrix
 
+# Function to change the parameters to 
 
 def translation_rotation_to_transformation(rot_trans):
     """
@@ -165,6 +166,8 @@ def translation_rotation_to_transformation(rot_trans):
     return T
 
 #print(translation_rotation_to_transformation([0.5,0.4,3.0,2,3,6]))
+
+# Function to change the transformation matrix to parameters 
 
 def transformation_to_translation_rotation(trans):
     assert trans.shape == (4, 4), "A matriz deve ser 4x4"
@@ -276,6 +279,7 @@ params_opti = result.x.tolist()
 trans_opti = translation_rotation_to_transformation(params_opti)
 pcd_source_opti = apply_transformation(pcd2,trans_opti)
 draw_geometries(pcd1,pcd_source_opti, view, False, "Final optimization")
+
 
 
 
