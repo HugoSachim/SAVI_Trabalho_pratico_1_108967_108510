@@ -43,11 +43,11 @@ Para a visualização, foi utilizada a função VisualizerWithKeyCallback, permi
 *Interface principal do visualizador, com os botões para alternar etapas e cores.*
 
 ![ICP no processo de otimização](images/ICP_tempo_real_cor_normal.png) 
-*ICP no processo de otimizaçã.*
+*ICP no processo de otimização.*
 
-![ICP no processo de otimização com esquema de cores](images/ICP_tempo_real_cor_normal.png) 
+![ICP no processo de otimização com esquema de cores](images/ICP_tempo_real_esquema_de_cor.png) 
 *ICP no processo de otimização com esquema de cores.*
 
-![Resultado ICP personalizado](images/ICP_tempo_real_cor_normal.png) 
+![Resultado ICP personalizado](images/ICP_custom.png) 
 *Alinhamento final usando ICP personalizado.*
 
